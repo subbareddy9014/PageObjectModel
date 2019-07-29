@@ -1,0 +1,41 @@
+# User-specific stuff:
+.idea/*
+./.idea
+.idea
+
+# Gradle:
+.gradle
+gradle
+build
+
+### Java template
+*.class
+
+#ignoring entire bin folder
+/bin/
+
+#ignoring entire test-output folder
+test-output/
+
+#ignoring entire testreport folder
+testreport-html/
+TestReport/
+
+#ignoring entire testng-xslt folder
+testng-xslt/
+
+#ignore these files
+/hs_err_pid5128.log
+/*.zip
+.*
+.~
+/*.JPEG
+!.gitignore
+!.classpath
+!.project
+/target/
+
+**/*.html
+**/*.class
+**/*.iml
+out/
