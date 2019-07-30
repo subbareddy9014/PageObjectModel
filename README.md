@@ -6,3 +6,8 @@
 * FireFox       : 
 * IE            :
 * Safari        :
+
+```
+To run Test cases
+git clone https://github.com/subbareddy9014/PageObjectModel.git
+```
