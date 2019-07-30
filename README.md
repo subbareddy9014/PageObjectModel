@@ -1,7 +1,6 @@
 <h3 align="center">Selenium PageObject Model</h3>
 <h4 align="center">This is a sample project to describe how to use page object model in selenium automation framework<h4/>
-```
-```
+
 ________________________________________________________________________________________________________________________
 👉*Drivers used in this project*
 * Chrome : [76.0.3809.68](http://chromedriver.chromium.org/)
