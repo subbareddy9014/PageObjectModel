@@ -8,9 +8,21 @@ version '1.0-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
-    mavenCentral()
+    maven { url "http://repo.maven.apache.org/maven2" }
+    jcenter()
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation 'org.seleniumhq.selenium:selenium-java:3.141.59'
+    implementation 'org.testng:testng:6.14.3'
+    implementation 'org.apache.commons:commons-io:1.3.2'
+    implementation 'commons-lang:commons-lang:2.6'
+    implementation 'org.apache.poi:poi:4.0.1'
+    implementation 'org.apache.poi:poi-examples:4.0.1'
+    implementation 'org.apache.poi:poi-excelant:4.0.1'
+    implementation 'org.apache.poi:poi-ooxml:4.0.1'
+    implementation 'org.apache.poi:poi-ooxml-schemas:4.0.1'
+    implementation 'org.apache.poi:poi-scratchpad:4.0.1'
+    implementation 'com.aventstack:extentreports:4.0.9'
+    compile        'org.apache.commons:commons-lang3:3.9'
 }

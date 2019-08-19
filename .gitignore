@@ -39,3 +39,4 @@ testng-xslt/
 **/*.class
 **/*.iml
 out/
+src/main/java/Main.java
