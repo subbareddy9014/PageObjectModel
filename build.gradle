@@ -12,6 +12,100 @@ repositories {
     jcenter()
 }
 
+configurations { antClasspath }
+dependencies {
+    antClasspath 'ant:ant-javamail:1.6.5'
+    antClasspath 'javax.activation:activation:1.1.1'
+    antClasspath 'javax.mail:mail:1.4.7'
+}
+ClassLoader antClassLoader = org.apache.tools.ant.Project.class.classLoader
+configurations.antClasspath.each { File jar ->
+    antClassLoader.addURL(jar.toURI().toURL())
+}
+
+def getPropertyX(String propName) {
+    return hasProperty(propName) ? getProperty(propName) : ''
+}
+
+static String getCurrentTime() {
+    return new Date().format("dd_MMMMM_yyyy_hh_mm_ss_a_z")
+}
+
+//Read command line arguments
+String browser = getPropertyX("browser")
+String currentTime = getCurrentTime()
+String systemUserName = System.properties['user.name']
+String systemOSName = System.properties['os.name']
+
+task validateGoogleLogin {
+    dependsOn 'clean'
+    dependsOn 'runTests'
+    dependsOn 'zipHTMLReports'
+    dependsOn 'zipExtentReports'
+    dependsOn 'publishReports'
+}
+
+task runTests(type: Test) {
+    mustRunAfter(clean)
+    if (!browser.isEmpty()) {
+        systemProperty 'browser', browser
+    } else {
+        //throw new GradleException("Test configurations are not properly set")
+    }
+    useTestNG() {
+        ignoreFailures = true
+        suites 'src/test/resources/testSuites/tests.xml'
+        outputDirectory = file("$project.buildDir/reports/HtmlReport")
+    }
+    testLogging.events "passed", "skipped", "failed"
+    testLogging.showStandardStreams = true
+    testLogging.exceptionFormat = "full"
+    reports.html.enabled = false
+}
+
+task zipHTMLReports(type: Zip) {
+    mustRunAfter(runTests)
+    archiveName = "${currentTime}_GoogleLoginTests_HTMLReport.zip"
+    destinationDir = file("$project.buildDir/reports/")
+    from "$project.buildDir/reports/HtmlReport/"
+}
+
+task zipExtentReports(type: Zip) {
+    mustRunAfter(zipHTMLReports)
+    archiveName = "${currentTime}_GoogleLoginTests_ExtentReport.zip"
+    destinationDir = file("$project.buildDir/reports/")
+    from "$project.buildDir/reports/ExtentReport/"
+}
+
+task publishReports {
+    mustRunAfter(zipExtentReports)
+    doLast {
+        String emailRecipients = [
+                "<Comma separated email recipients>"
+        ].join(",")
+        String ccRecipients = [
+                "<Comma separated email recipients>"
+        ].join(",")
+        def mailParams = [
+                mailhost       : "smtp.gmail.com",
+                user           : "<Your Gmail ID>",
+                password       : "<Gmail ID Password>",
+                mailport       : "465",
+                ssl            : "true",
+                subject        : "Google Account Login Automation Test Report On ${browser} Browser, On ${systemOSName} Operating System",
+                messagemimetype: "text/html",
+                from           : "<Your Gmail ID>",
+                tolist         : emailRecipients,
+                cclist         : ccRecipients
+        ]
+        File emailableReport = file("build/reports/HtmlReport/emailable-report.html")
+        String html_text = emailableReport.exists() ? emailableReport.text : ""
+        ant.mail(mailParams) {
+            message("Hi All,<br> " + "${html_text}")
+        }
+    }
+}
+
 dependencies {
     implementation 'org.seleniumhq.selenium:selenium-java:3.141.59'
     implementation 'org.testng:testng:6.14.3'

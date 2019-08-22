@@ -46,7 +46,7 @@ public class DriversFactory {
                 chromeOptions.setCapability(CapabilityType.LOGGING_PREFS, loggingPreferences);
                 driverFile = SystemUtils.IS_OS_WINDOWS ? "chromedriver.exe" : "chromedriver";
                 System.setProperty("webdriver.chrome.driver", dir.append(driverFile).toString());
-                return SystemUtils.IS_OS_LINUX ? ArchUtils.getProcessor().is32Bit() ? null :new ChromeDriver(chromeOptions) : new ChromeDriver(chromeOptions);
+                return SystemUtils.IS_OS_LINUX ? ArchUtils.getProcessor().is32Bit() ? null : new ChromeDriver(chromeOptions) : new ChromeDriver(chromeOptions);
             case "firefox":
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
                 firefoxOptions.setCapability(CapabilityType.LOGGING_PREFS, loggingPreferences);
@@ -74,5 +74,4 @@ public class DriversFactory {
         }
         return null;
     }
-
 }
