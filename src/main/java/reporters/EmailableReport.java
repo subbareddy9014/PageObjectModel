@@ -66,7 +66,7 @@ public class EmailableReport implements IReporter {
         out.println("<html xmlns=\"http://www.w3.org/1999/xhtml\">");
         out.println("<head>");
         out.println("<meta charset='utf-8'>");
-        out.println("<title>COW Login Automation Test Report</title>");
+        out.println("<title>Google Login Automation Test Report</title>");
         out.println("<style type=\"text/css\">");
         out.println("h1 {text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb,0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,.1),0 0 5px rgba(0,0,0,.1),0 1px 3px rgba(0,0,0,.3),0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.2),0 20px 20px rgba(0,0,0,.15); color: #8A2BE2;}");
         out.println("table {margin-bottom:10px;border-collapse:collapse;empty-cells:show}");

@@ -13,6 +13,9 @@ ________________________________________________________________________________
 👉*To run Test cases*
 ```
 git clone https://github.com/subbareddy9014/PageObjectModel.git
+gradle validateGoogleLogin -Pbrowser="<Which browser you want to run>"
+
+Note : You have to edit few values in build.gradle file and make sute that you have installed all the required softwares.
 ```
 
 

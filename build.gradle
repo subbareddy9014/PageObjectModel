@@ -34,7 +34,6 @@ static String getCurrentTime() {
 //Read command line arguments
 String browser = getPropertyX("browser")
 String currentTime = getCurrentTime()
-String systemUserName = System.properties['user.name']
 String systemOSName = System.properties['os.name']
 
 task validateGoogleLogin {
