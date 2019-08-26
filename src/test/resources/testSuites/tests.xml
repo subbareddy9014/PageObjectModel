@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Google Login test suite" parallel="classes">
+
+    <listeners>
+        <listener class-name="reporters.EmailableReport"/>
+        <listener class-name="utility.BaseTest"/>
+    </listeners>
+
+    <parameter name="browser" value="${browser}"/>
+
+    <!-- Test classes -->
+    <test name="LoginTest">
+        <classes>
+            <class name="tests.GoogleLoginTests"/>
+        </classes>
+    </test>
+</suite>
